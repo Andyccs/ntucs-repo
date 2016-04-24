@@ -26,7 +26,7 @@ Projects:
 - [CZ3007 Compiler Technique, Compiler for PL3007](https://github.com/Andyccs/PL3007Compiler)
 - [CZ4013 Distributed System, Remote File System](https://github.com/cly753/CX4013-Remote-File-System)
 - [CZ4024 Cryptography and Network Security, Attack on RC4 Protocol](https://github.com/Andyccs/CZ4024AttackRC4)
-- [CZ4034 Information Retrieval Assignment, Sport Wweets](https://github.com/Andyccs/sport-news-retrieval)
+- [CZ4034 Information Retrieval Assignment, Sport Tweets](https://github.com/Andyccs/sport-news-retrieval)
 - [CZ4041 Machine Learning Project, CIFAR-10](https://github.com/Andyccs/cifar10)
 - [CZ4041 Machine Learning Project, Sentiment Analysis on Movie Review](https://github.com/soelynn/SAM)
 - [CZ4042 Neural Network Assignment, Housing Price prediction and Spam Emails Prediction](https://github.com/Andyccs/Neural-Network-Assignment)

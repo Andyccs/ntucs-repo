@@ -1,0 +1,406 @@
+#VRML V2.0 utf8 
+# Copyright by Liu Qi and Alexei Sourin
+EXTERNPROTO FGeometry [
+exposedField SFString definition
+exposedField MFFloat parameters
+exposedField MFInt32 resolution
+	exposedField SFVec3f bboxCenter
+	exposedField SFVec3f bboxSize
+	exposedField SFString type
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan 
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FGeometry"
+EXTERNPROTO FMaterial [
+	exposedField SFString diffuseColor
+	exposedField SFString type
+	exposedField MFColor patternColor
+	exposedField MFFloat patternKey
+	exposedField SFString ambientIntensity
+	exposedField SFString emissiveColor
+	exposedField SFString shininess
+	exposedField SFString specularColor
+	exposedField SFString transparency
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FMaterial"
+EXTERNPROTO FTexture3D [
+	exposedField SFString definition
+	exposedField SFString type
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTexture3D"
+EXTERNPROTO FAppearance [
+	exposedField SFNode	material
+	exposedField SFNode	texture
+	exposedField SFNode	textureTransform
+	exposedField SFNode	texture3D
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FAppearance"
+EXTERNPROTO FShape [
+	exposedField SFNode	geometry
+	exposedField SFNode	appearance
+	exposedField SFString polygonizer
+	exposedField MFNode	parents
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FShape"
+EXTERNPROTO FTransform [
+	exposedField SFString operation
+	exposedField SFString type
+	exposedField SFString polygonizer
+	exposedField MFFloat parameters
+	exposedField SFString center
+	exposedField SFString rotation
+	exposedField SFString scale
+	exposedField SFString scaleOrientation
+	exposedField SFString translation
+	exposedField MFNode children
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+    exposedField SFVec2f timeSpan
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www3.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTransform"
+
+NavigationInfo	{type [ "EXAMINE", "ANY"] }	
+Background {
+	skyColor 0 0 0
+}
+Viewpoint {
+fieldOfView 1.3
+position 0 0.5 3.5
+orientation 0 0 0 0
+}
+
+DEF body FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = fabs(sin(u*pi*200)/8)+0.494117;
+				g = 0.345098;
+				b = 0.203921;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+			
+			circle_btm = 0.7*0.7-x*x-((y+0.5)/(0.95*0.95))*((y+0.5)/(0.95*0.95));
+			disk1 = min(min(circle_btm,0.2-z),z+0.2);
+			circle_top = 0.5*0.5-x*x-((y-0.3)/(0.95*0.95))*((y-0.3)/(0.95*0.95));
+			disk2 = min(min(circle_top,0.2-z),z+0.2);
+			body = max(disk1,disk2); 
+
+			mid = min(0.2*0.2-x*x-(y-0.3)*(y-0.3),z+0.15);
+			fun = min(body,-mid);
+			return fun;		
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 1.41 2.1 0.41
+		bboxCenter 0 -0.2 0
+		resolution [70, 70, 20]
+		timeSpan 0 1
+	}
+}
+
+DEF board FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = fabs(sin(v*pi*100)/4)+0.321568;
+				g = 0.17254;
+				b = 0.02745;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+
+			board = min(min(min(min(min(0.2-x,0.2+x),y-0.3),1.8-y),0.225-z),z-0.2);
+			mid = min(0.2*0.2-x*x-(y-0.3)*(y-0.3),z);
+			board = min(board,-mid);
+			top = min(min(min(min(min(0.25-x,0.25+x),2.4-y),y-1.8),0.225-z),z-0.2);
+			return max(board,top);
+					
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.51 2.71 0.43
+		bboxCenter 0 1.05 0.0125
+		resolution [30, 100, 25]
+		timeSpan 0 1
+	}
+}
+
+DEF saddle FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 0.321568;
+				g = 0.17254;
+				b = 0.02745;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+
+			bottom = min(min(min(min(min(0.2-x,0.2+x),y+0.6),-(0.55+y)),0.25-z),z-0.2);
+			return bottom;		
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.45 0.055 0.055
+		bboxCenter 0 -0.575 0.225
+		resolution [15, 5, 5]
+		timeSpan 0 1
+	}
+}
+
+DEF nut FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 0.494117;
+				g = 0.345098;
+				b = 0.203921;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+
+			top = min(min(min(min(min(0.2-x,0.2+x),1.80-y),y-1.76),0.25-z),z-0.225);
+			return top;		
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.41 0.05 0.028
+		bboxCenter 0 1.78 0.238
+		resolution [15, 5, 5]
+		timeSpan 0 1
+	}
+}
+
+DEF string FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 1;
+				g = 1;
+				b = 1;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+			
+			string1 = min(min((0.01*0.01-(x+0.126)*(x+0.126)-(z-0.26)*(z-0.26)),y+0.6),2-y);
+			string2 = min(min((0.01*0.01-(x+0.042)*(x+0.042)-(z-0.26)*(z-0.26)),y+0.6),2.2-y);
+			string3 = min(min((0.01*0.01-(x-0.042)*(x-0.042)-(z-0.26)*(z-0.26)),y+0.6),2.2-y);
+			string4 = min(min((0.01*0.01-(x-0.126)*(x-0.126)-(z-0.26)*(z-0.26)),y+0.6),2-y);	
+			return max(max(max(string1,string2),string3),string4);		
+		}"
+		
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.275 2.85 0.021
+		bboxCenter 0 0.8 0.26
+		resolution [30, 50, 5]
+		timeSpan 0 1
+	}
+}
+
+DEF tuning FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 1;
+				g = 1;
+				b = 1;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+			tune1 = 1.5*1.5-(x+0.1)*(x+0.1)/(0.05*0.05)-(y-2)*(y-2)/(0.03*0.03)-(z-0.13)*(z-0.13)/(0.05*0.05); 
+			tune2 = 1.5*1.5-(x-0.1)*(x-0.1)/(0.05*0.05)-(y-2)*(y-2)/(0.03*0.03)-(z-0.13)*(z-0.13)/(0.05*0.05); 
+			tune3 = 1.5*1.5-(x+0.1)*(x+0.1)/(0.05*0.05)-(y-2.2)*(y-2.2)/(0.03*0.03)-(z-0.13)*(z-0.13)/(0.05*0.05); 
+			tune4 = 1.5*1.5-(x-0.1)*(x-0.1)/(0.05*0.05)-(y-2.2)*(y-2.2)/(0.03*0.03)-(z-0.13)*(z-0.13)/(0.05*0.05); 
+			tune = max(max(max(tune1,tune2),tune3),tune4);
+			
+			return tune;	
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.4 0.3 0.15
+		bboxCenter 0 2.1 0.13
+		resolution [20, 20, 20]
+		timeSpan 0 1
+	}
+}
+
+DEF tuning_head FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 1;
+				g = 1;
+				b = 1;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "
+		function frep(x1,y1,z1,t){
+			x=x1;
+			y=y1;
+			z=z1;
+
+			tune_head1 = min(min(((z-0.22)*(z-0.22)-(y-2)*(y-2)-(x+0.1)*(x+0.1)),z-0.22),0.27-z);
+			tune_head2 = min(min(((z-0.22)*(z-0.22)-(y-2)*(y-2)-(x-0.1)*(x-0.1)),z-0.22),0.27-z);
+			tune_head3 = min(min(((z-0.22)*(z-0.22)-(y-2.2)*(y-2.2)-(x+0.08)*(x+0.08)),z-0.22),0.27-z);
+			tune_head4 = min(min(((z-0.22)*(z-0.22)-(y-2.2)*(y-2.2)-(x-0.08)*(x-0.08)),z-0.22),0.27-z);
+			tune_head = max(max(max(tune_head1,tune_head2),tune_head3),tune_head4);	
+			return tune_head;	
+		}"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.3 0.3 0.06
+		bboxCenter 0 2.1 0.25
+		resolution [20, 20, 10]
+		timeSpan 0 1
+	}
+}
+
+DEF ribbon FShape {
+polygonizer "analytical"
+	loop FALSE
+	cycleInterval 1
+	appearance FAppearance {
+		material FMaterial {
+			diffuseColor "
+				r = 1;
+				g = 0;
+				b = 0;"
+			patternKey [0.3, 0.7]
+			patternColor [0 1 0, 1 0 0]
+			timeSpan 0 1
+		}
+		texture3D FTexture3D {
+			definition "0.05*sin(y*2*pi)*sin(z*4*pi)"
+			timeSpan 0 1
+         type "displacement"
+		}
+	}
+	geometry FGeometry {
+		definition "0.3/sqrt((x-0.3-0.1)^2+(y+0.3-2.5)^2+(z-0.2)^2+0.001)+0.3/sqrt((x-0.1)^2+(y-2.5)^2+(z-0.2)^2+0.001)-2.5"
+		parameters [-1, 1, -1, 1, -1, 1]
+		bboxSize 0.7 0.7 0.7
+		bboxCenter 0.25 2.35 0.2
+		resolution [40, 40, 30]
+		timeSpan 0 1
+	}
+}

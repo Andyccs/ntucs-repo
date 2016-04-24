@@ -1,0 +1,117 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO FGeometry [
+	exposedField SFString definition
+	exposedField MFFloat parameters
+	exposedField MFInt32 resolution
+	exposedField SFVec3f bboxCenter
+	exposedField SFVec3f bboxSize
+	exposedField SFString type
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FGeometry"
+EXTERNPROTO FMaterial [
+	exposedField SFString diffuseColor
+	exposedField SFString type
+	exposedField MFColor patternColor
+	exposedField MFFloat patternKey
+	exposedField SFString ambientIntensity
+	exposedField SFString emissiveColor
+	exposedField SFString shininess
+	exposedField SFString specularColor
+	exposedField SFString transparency
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FMaterial"
+EXTERNPROTO FTexture3D [
+	exposedField SFString definition
+	exposedField SFString type
+	exposedField MFFloat parameters
+	exposedField MFNode	parents
+	exposedField SFVec2f timeSpan
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTexture3D"
+EXTERNPROTO FAppearance [
+	exposedField SFNode	material
+	exposedField SFNode	texture
+	exposedField SFNode	textureTransform
+	exposedField SFNode	texture3D
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FAppearance"
+EXTERNPROTO FShape [
+	exposedField SFNode	geometry
+	exposedField SFNode	appearance
+	exposedField SFString polygonizer
+	exposedField MFNode	parents
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FShape"
+EXTERNPROTO FTransform [
+	exposedField SFString operation
+	exposedField SFString type
+	exposedField SFString polygonizer
+	exposedField MFFloat parameters
+	exposedField SFString center
+	exposedField SFString rotation
+	exposedField SFString scale
+	exposedField SFString scaleOrientation
+	exposedField SFString translation
+	exposedField MFNode children
+	exposedField MFNode	parents
+	eventIn	SFBool refresh
+    exposedField SFVec2f timeSpan
+	exposedField SFTime	startTime
+	exposedField SFTime stopTime
+    exposedField SFTime cycleInterval
+    exposedField SFBool	loop
+	exposedField SFBool	enabled
+	eventOut SFTime	cycleTime
+	eventIn SFFloat set_fraction
+	field SFInt32 frames
+] "http://www.ntu.edu.sg/home/assourin/FVRML/FVRML.wrl#FTransform"
+
+Viewpoint {
+fieldOfView 1.3
+position 2 0 2
+orientation 0 1 0 0.7
+}
+
+DEF morph FShape {
+appearance FAppearance {
+material FMaterial {
+diffuseColor "
+	r=fabs(sin(fabs(1-2*t)*u)); 
+	b=fabs(cos(fabs(1-2*t)*u)*cos(u)); 
+	g=fabs(cos(fabs(1-2*t)*u)*sin(u));"
+timeSpan 0 1
+   }    }
+geometry FGeometry {
+resolution [70 70]
+parameters [0.00001 6.283185307 0.00001 3.1415926]
+definition "
+	x=(1.6*(cos(v))^3)*(fabs(1-2*t)) 
+		+ (1.5*(v/pi)*(cos(u)))*(1-fabs(1-2*t));
+
+	y=(1.6*(cos(u)*sin(v))^3)*(fabs(1-2*t)) 
+		+ (1.5*(v/pi)*sin(u)*cos(u))*(1-fabs(1-2*t));
+
+	z=(1.6*sin(u)*cos(v))*(fabs(1-2*t)) 
+		+ (1.5*(v/pi)*(sin(2*(v/pi)))^5)*(1-fabs(1-2*t));
+"
+
+}  
+
+}
+
+DEF	time TimeSensor	{
+	cycleInterval 10
+	loop TRUE
+}
+ROUTE time.fraction_changed	TO morph.set_fraction

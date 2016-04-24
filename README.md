@@ -11,8 +11,8 @@ Summaries:
 
 Projects:
 
-- [CZ1003 Introduction to Programming, hangman](https://github.com/Andyccs/ntucs-repo/tree/master/CZ1003/hangman.py)
-- [CZ1003 Introduction to Programming, dynamic pattern](https://github.com/Andyccs/ntucs-repo/tree/master/CZ1003/dynamic_pattern.py)
+- [CZ1003 Introduction to Programming, hangman](https://github.com/Andyccs/ntucs-repo/blob/master/CZ1003/hangman.py)
+- [CZ1003 Introduction to Programming, dynamic pattern](https://github.com/Andyccs/ntucs-repo/blob/master/CZ1003/dynamic_pattern.py)
 - [CZ2002 Object-oriented Design and Programming, Movie Booking and Listing Management Application](https://github.com/Andyccs/CZ2002-moblima)
 - [CZ2003 Computer Graphic, Implicit Fantasies](https://github.com/Andyccs/ntucs-repo/tree/master/CZ2003/Assignment1.wrl)
 - [CZ2003 Computer Graphic, Parametric Metamorphoses](https://github.com/Andyccs/ntucs-repo/tree/master/CZ2003/Assignment2.wrl)

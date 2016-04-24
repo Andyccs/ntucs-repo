@@ -11,10 +11,10 @@ Summaries:
 
 Projects:
 
-- [CZ1003 Introduction to Programming, hangman](CZ1003/hangman)
-- [CZ1003 Introduction to Programming, dynamic pattern](CZ1003/dynamic_pattern)
-- [CZ2003 Computer Graphic, Implicit Fantasies](CZ2003/Assignment1.wrl)
-- [CZ2003 Computer Graphic, Parametric Metamorphoses](CZ2003/Assignment2.wrl)
+- [CZ1003 Introduction to Programming, hangman](https://github.com/Andyccs/ntucs-repo/tree/master/CZ1003/hangman)
+- [CZ1003 Introduction to Programming, dynamic pattern](Chttps://github.com/Andyccs/ntucs-repo/tree/master/Z1003/dynamic_pattern)
+- [CZ2003 Computer Graphic, Implicit Fantasies](https://github.com/Andyccs/ntucs-repo/tree/master/CZ2003/Assignment1.wrl)
+- [CZ2003 Computer Graphic, Parametric Metamorphoses](https://github.com/Andyccs/ntucs-repo/tree/master/CZ2003/Assignment2.wrl)
 - [CZ3002 Advance Software Engineering, PYP Solutions, Backend](https://github.com/Andyccs/PYP_Cloud)
 - [CZ3002 Advance Software Engineering, PYP Solutions, Android](https://github.com/Andyccs/PYP_Android)
 - [CZ3003 System Analysis and Design, Lynnux Crisis Management System](https://github.com/soelynn/LynnuxCMS)

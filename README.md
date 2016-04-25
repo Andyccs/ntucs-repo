@@ -8,6 +8,7 @@ Summaries:
 - [CZ4042 Neural Network](https://github.com/Andyccs/neural-network-summary)
 - [CZ4034 Information Retrieval](https://github.com/Andyccs/CZ4034-information-retrieval-summary)
 - [CZ4041 Machine Learning](https://github.com/Andyccs/CZ4041-machine-learning-summary)
+- [CZ8003 Human Resource Management and Entrepreneur](https://github.com/Andyccs/ntucs-repo/blob/master/CZ8003/HRMSummary.md)
 
 Projects:
 

@@ -38,7 +38,8 @@ Projects:
 
 Past Year Paper Solutions:
 
-- [CZ4034 Information Retrieval](https://github.com/Andyccs/information-retrieval-pyp)
+- [CZ4013 Distributed System](https://github.com/Andyccs/ntucs-pyp)
+- [CZ4034 Information Retrieval](https://github.com/Andyccs/ntucs-pyp)
 
 Final Year Project:
 

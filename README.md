@@ -41,6 +41,7 @@ Past Year Paper Solutions:
 
 - [CZ4013 Distributed System](https://github.com/Andyccs/ntucs-pyp)
 - [CZ4034 Information Retrieval](https://github.com/Andyccs/ntucs-pyp)
+- [CZ4041 Machine Learning](https://github.com/Andyccs/ntucs-pyp)
 
 Final Year Project:
 

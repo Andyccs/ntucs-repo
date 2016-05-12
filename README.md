@@ -47,6 +47,7 @@ Final Year Project:
 
 - [Software Quality Analysis Tool](https://github.com/Andyccs/sqat)
 - [Software Quality Analysis Tool Report](https://github.com/Andyccs/sqat-report)
+- [Software Quality Analysis Tool Presentation](https://github.com/Andyccs/sqat-presentation)
 - [Software Quality Analysis Tool, by previous students](https://github.com/Andyccs/sqat-archived)
 - [Gamification for E-commerce Android Application, Server Side](https://github.com/Andyccs/nwk_mall)
 - [Gamification for E-commerce Android Application, Android Client](https://github.com/Andyccs/nwk_android)
